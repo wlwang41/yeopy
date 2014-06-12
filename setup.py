@@ -6,7 +6,7 @@ import yeopy
 
 entry_points = {
     "console_scripts": [
-        "yo = yeopy.cli:main",
+        "yeopy = yeopy.cli:main",
     ]
 }
 
