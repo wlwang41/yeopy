@@ -33,9 +33,9 @@ def main():
     if args['init'] and args['-p']:
         logger.info('Init.')
         # prepare to generate files
-        logger.info('Create project directory.')
         gen = Generator(args['-p'])
         gen.gen_root_dir()
+        gen.gen_readme()
         logger.info('Done.')
 
 if __name__ == '__main__':

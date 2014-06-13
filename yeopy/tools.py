@@ -90,6 +90,11 @@ def listdir_nohidden(path):
             yield f
 
 
+def write_file(path, content):
+    with open(path, 'w') as f:
+        f.write(content)
+
+
 if __name__ == "__main__":
     print(color_msg("black", "Black"))
     print(color_msg("red", "Red"))
