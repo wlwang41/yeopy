@@ -6,13 +6,13 @@ import os
 import sys
 
 from jinja2 import (
-    Environment, FileSystemLoader, TemplateError
+    Environment, FileSystemLoader, TemplateError,
+    # ChoiceLoader, PackageLoader
 )
 
 from yeopy import tools
 
 logger = logging.getLogger(__name__)
-# os.getcwd()
 
 
 class Generator(object):
@@ -23,22 +23,36 @@ class Generator(object):
         self.project_root_dir = os.path.join(self.user_dir, pname)
 
         try:
-            # jinja2
-            # 没有找到具体html的路径
-            self.env = Environment(
-                loader=FileSystemLoader(
-                    os.path.join(os.path.dirname(__file__), 'templates')
-                )
-            )
-        except TemplateError, e:
+            # self.env = Environment(loader=ChoiceLoader([
+            #     FileSystemLoader('templates'),
+            #     PackageLoader('yeopy', 'templates'),
+            # ]))
+            self.env = Environment(loader=FileSystemLoader(
+                os.path.join(os.path.dirname(__file__), 'templates')
+            ))
+
+            self.templates = {
+                'readme': self.env.get_template('readme.tpl'),
+            }
+        except TemplateError as e:
             logging.error(str(e))
             sys.exit(1)
 
     def gen_root_dir(self):
         os.mkdir(os.path.join(self.user_dir, self.pname))
+        logger.info('Generate root directory.')
 
     def gen_readme(self):
-        template = self.env.get_template('readme.tpl')
+        confs = {
+            'pname': self.pname,
+        }
+        _path = os.path.join(self.project_root_dir, 'README.md')
+        # prepare to render confs
+        render_result = self.templates['readme'].render(confs)
+        logger.debug('readme result: ' + render_result)
+        # prepare to write this result to README.md
+        tools.write_file(_path, render_result)
+        logger.info('Generate README.md.')
 
     def gen_tests(self):
         pass
