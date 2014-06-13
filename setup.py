@@ -13,6 +13,7 @@ entry_points = {
 # TODO(crow): requirements
 requires = [
     "docopt",
+    "jinja2",
 ]
 
 setup(
