@@ -5,23 +5,22 @@
 Yeopy CLI
 
 Usage:
-  yeopy  init <project_name>
+  yeopy  init -p <project_name>
   yeopy  -h | --help
   yeopy  -V | --version
 
 Options:
   -h, --help             Help information.
   -V, --version          Show version.
-  -p, --project          The name of project
+  -p <project_name>      The name of project.
 
 """
 
 import logging
-import os
 
 from docopt import docopt
 
-from yeopy.tools import logging_init
+from yeopy.log import logging_init
 from yeopy import __version__
 from yeopy.gen import Generator
 
@@ -34,6 +33,7 @@ def main():
     if args['init'] and args['-p']:
         logger.info('Init.')
         # prepare to generate files
+        logger.info('Create project directory.')
         gen = Generator(args['-p'])
         gen.gen_root_dir()
         logger.info('Done.')
