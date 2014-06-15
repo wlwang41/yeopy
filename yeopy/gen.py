@@ -39,6 +39,9 @@ class Generator(object):
             sys.exit(1)
 
     def gen_root_dir(self):
+        if tools.check_path_exists(os.path.join(self.user_dir, self.pname)):
+            logger.error('Path exist.')
+            sys.exit(1)
         os.mkdir(os.path.join(self.user_dir, self.pname))
         logger.info('Generate root directory.')
 
