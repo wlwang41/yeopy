@@ -5,4 +5,4 @@
 
 Yeopy is a scaffold for python web project, like [yeoman](http://yeoman.io/).
 
-> Now it's just a demo.
+> Now it's just a demo for myself. Feel free to fork it.
