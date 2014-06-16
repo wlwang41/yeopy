@@ -4,6 +4,7 @@
 [![The MIT License](http://img.shields.io/badge/license-MIT-yellow.svg)](https://github.com/wlwang41/yeopy/blob/master/LICENSE)
 
 Yeopy is a scaffold for python web project, like [yeoman](http://yeoman.io/).
+
 Now the structure is fixed(tornado + mongodb(mongokit)).
 
 ## How to use it?
