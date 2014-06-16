@@ -39,10 +39,10 @@ class Generator(object):
             sys.exit(1)
 
     def gen_root_dir(self):
-        if tools.check_path_exists(os.path.join(self.user_dir, self.pname)):
+        if tools.check_path_exists(self.project_root_dir):
             logger.error('Path exist.')
             sys.exit(1)
-        os.mkdir(os.path.join(self.user_dir, self.pname))
+        os.mkdir(self.project_root_dir)
         logger.info('Generate root directory.')
 
     def gen_readme(self):
@@ -58,7 +58,8 @@ class Generator(object):
         logger.info('Generate README.md.')
 
     def gen_tests(self):
-        pass
+        os.mkdir(os.path.join(self.project_root_dir, 'tests'))
+        logger.info('Generate tests directory.')
 
     def gen_requirements(self):
         pass

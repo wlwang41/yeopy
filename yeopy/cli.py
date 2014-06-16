@@ -36,6 +36,7 @@ def main():
         gen = Generator(args['-p'])
         gen.gen_root_dir()
         gen.gen_readme()
+        gen.gen_tests()
         logger.info('Done.')
 
 if __name__ == '__main__':
