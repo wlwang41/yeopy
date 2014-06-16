@@ -39,6 +39,10 @@ def main():
         gen.gen_tests()
         gen.gen_requirements()
         gen.gen_fabfile()
+        gen.gen_python_package()
+        gen.gen_app()
+        gen.gen_tools()
+        gen.gen_handlers()
         logger.info('Done.')
 
 if __name__ == '__main__':
