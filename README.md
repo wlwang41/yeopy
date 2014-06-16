@@ -5,7 +5,7 @@
 
 Yeopy is a scaffold for python web project, like [yeoman](http://yeoman.io/).
 
-Now the structure is fixed(tornado + mongodb(mongokit)).
+Now the structure is fixed([tornado](http://www.tornadoweb.org/) + [mongodb](http://www.mongodb.org/)([mongokit](https://github.com/namlook/mongokit))).
 
 ## How to use it?
 
