@@ -43,6 +43,10 @@ def main():
         gen.gen_app()
         gen.gen_tools()
         gen.gen_handlers()
+        gen.gen_models()
+        gen.gen_exceptions()
+        gen.gen_log()
+        gen.gen_consts()
         logger.info('Done.')
 
 if __name__ == '__main__':
