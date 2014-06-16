@@ -21,6 +21,7 @@ class Generator(object):
         self.pname = pname
         self.user_dir = os.getcwd()
         self.project_root_dir = os.path.join(self.user_dir, pname)
+        self.python_pack_dir = os.path.join(self.project_root_dir, self.pname)
 
         try:
             # self.env = Environment(loader=ChoiceLoader([
@@ -34,6 +35,10 @@ class Generator(object):
             self.templates = {
                 'readme': self.env.get_template('readme.tpl'),
                 'fabfile': self.env.get_template('fabfile.tpl'),
+                'init': self.env.get_template('init.tpl'),
+                'app': self.env.get_template('app.tpl'),
+                'tools': self.env.get_template('tools.tpl'),
+                'handler_base': self.env.get_template('handler_base.tpl'),
             }
         except TemplateError as e:
             logging.error(str(e))
@@ -71,23 +76,39 @@ class Generator(object):
         _path = os.path.join(self.project_root_dir, 'fabfile.py')
         # prepare to render confs
         render_result = self.templates['fabfile'].render()
-        # prepare to write this result to README.md
         tools.write_file(_path, render_result)
         logger.info('Generate fabfile.')
 
+    def gen_python_package(self):
+        os.mkdir(self.python_pack_dir)
+        # create __init__.py
+        render_result = self.templates['init'].render()
+        tools.write_file(os.path.join(self.python_pack_dir, '__init__.py'), render_result)
+        logger.info('Generate python package.')
+
     def gen_app(self):
-        pass
+        render_result = self.templates['app'].render()
+        tools.write_file(os.path.join(self.python_pack_dir, 'app.py'), render_result)
+        logger.info('Generate app.py.')
 
     def gen_tools(self):
-        pass
+        render_result = self.templates['tools'].render()
+        tools.write_file(os.path.join(self.python_pack_dir, 'tools.py'), render_result)
+        logger.info('Generate tools.py.')
 
     def gen_handlers(self):
-        pass
+        _handlers_path = os.path.join(self.python_pack_dir, 'handlers')
+        os.mkdir(_handlers_path)
+        # create __init__.py
+        render_result = self.templates['init'].render()
+        tools.write_file(os.path.join(_handlers_path, '__init__.py'), render_result)
+        # create base handler
+        _base_handler_path = os.path.join(_handlers_path, 'base.py')
+        render_result = self.templates['handler_base'].render()
+        tools.write_file(_base_handler_path, render_result)
+        logger.info('Generate handlers.')
 
     def gen_models(self):
-        pass
-
-    def gen_controlers(self):
         pass
 
     def gen_exceptions(self):
