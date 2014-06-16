@@ -3,15 +3,13 @@
 
 class CODES(object):
 
-    SUCCESS = (0, u'成功=. =')
-    FAILURE = (1, u'系统发生了未知的错误')
+    SUCCESS = (0, u'')
+    FAILURE = (1, u'')
 
-    HTTP_FAILURE = (10001, u'网络请求失败')
-    RESOURCE_EXIST = (50000, u'更新或创建的资源已经存在')
-    RESOURCE_NOT_FOUND = (10002, u'资源没有找到')
-    SAVE_CANNOT_PASS_FIELDS = (10003, u'save操作的字段比数据库中字段少')
-    ITEMS_LENGTH_ERROR = (10004, u'表单长度不在0到20之间')
-    FORM_REMOVED = (10005, u'该表单已经被删除')
+    HTTP_FAILURE = (10001, u'')
+    RESOURCE_EXIST = (50000, u'')
+    RESOURCE_NOT_FOUND = (10002, u'')
+    SAVE_CANNOT_PASS_FIELDS = (10003, u'')
 
 
 class {{pexc}}(Exception):

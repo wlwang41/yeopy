@@ -30,7 +30,7 @@ class BaseDoc(Document):
     def find_one_without_none(self, *args, **kwargs):
         rv = self.collection.find_one(wrap=self._obj_class, *args, **kwargs)
         if not rv:
-            raise CrowException(CODES.RESOURCE_NOT_FOUND, msg=self.collection.name)
+            raise {{pexc}}(CODES.RESOURCE_NOT_FOUND, msg=self.collection.name)
         return rv
 
     # def save(self, *args, **kwargs):
@@ -41,7 +41,7 @@ class BaseDoc(Document):
     #        or set(_keys) == set(str_keys):
     #         super(BaseDoc, self).save(*args, **kwargs)
     #     else:
-    #         raise CrowException(CODES.SAVE_CANNOT_PASS_FIELDS)
+    #         raise {{pexc}}(CODES.SAVE_CANNOT_PASS_FIELDS)
 
 
 # Import your models class here!!!
