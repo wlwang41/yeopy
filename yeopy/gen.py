@@ -39,6 +39,10 @@ class Generator(object):
                 'app': self.env.get_template('app.tpl'),
                 'tools': self.env.get_template('tools.tpl'),
                 'handler_base': self.env.get_template('handler_base.tpl'),
+                'base_init': self.env.get_template('base_init.tpl'),
+                'exc': self.env.get_template('exc.tpl'),
+                'log': self.env.get_template('log.tpl'),
+                'consts': self.env.get_template('consts.tpl'),
             }
         except TemplateError as e:
             logging.error(str(e))
@@ -109,13 +113,33 @@ class Generator(object):
         logger.info('Generate handlers.')
 
     def gen_models(self):
-        pass
+        confs = {
+            'pexc': self.pname.title() + 'Exception',
+        }
+        _models_path = os.path.join(self.python_pack_dir, 'models')
+        os.mkdir(_models_path)
+        # create __init__.py
+        render_result = self.templates['base_init'].render(confs)
+        tools.write_file(os.path.join(_models_path, '__init__.py'), render_result)
+        logger.info('Generate models.')
 
     def gen_exceptions(self):
-        pass
+        confs = {
+            'pexc': self.pname.title() + 'Exception',
+        }
+        _exc_path = os.path.join(self.python_pack_dir, 'exc.py')
+        render_result = self.templates['exc'].render(confs)
+        tools.write_file(_exc_path, render_result)
+        logger.info('Generate exc.py.')
 
     def gen_log(self):
-        pass
+        _log_path = os.path.join(self.python_pack_dir, 'log.py')
+        render_result = self.templates['log'].render()
+        tools.write_file(_log_path, render_result)
+        logger.info('Generate log.py.')
 
     def gen_consts(self):
-        pass
+        _consts_path = os.path.join(self.python_pack_dir, 'consts.py')
+        render_result = self.templates['consts'].render()
+        tools.write_file(_consts_path, render_result)
+        logger.info('Generate consts.py.')
