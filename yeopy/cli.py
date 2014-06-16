@@ -37,6 +37,8 @@ def main():
         gen.gen_root_dir()
         gen.gen_readme()
         gen.gen_tests()
+        gen.gen_requirements()
+        gen.gen_fabfile()
         logger.info('Done.')
 
 if __name__ == '__main__':

@@ -33,6 +33,7 @@ class Generator(object):
 
             self.templates = {
                 'readme': self.env.get_template('readme.tpl'),
+                'fabfile': self.env.get_template('fabfile.tpl'),
             }
         except TemplateError as e:
             logging.error(str(e))
@@ -52,7 +53,6 @@ class Generator(object):
         _path = os.path.join(self.project_root_dir, 'README.md')
         # prepare to render confs
         render_result = self.templates['readme'].render(confs)
-        logger.debug('readme result: ' + render_result)
         # prepare to write this result to README.md
         tools.write_file(_path, render_result)
         logger.info('Generate README.md.')
@@ -62,10 +62,18 @@ class Generator(object):
         logger.info('Generate tests directory.')
 
     def gen_requirements(self):
-        pass
+        # Empty file considering the version.
+        _path = os.path.join(self.project_root_dir, 'requirements.txt')
+        tools.write_file(_path, '')
+        logger.info('Generate requirements file.')
 
     def gen_fabfile(self):
-        pass
+        _path = os.path.join(self.project_root_dir, 'fabfile.py')
+        # prepare to render confs
+        render_result = self.templates['fabfile'].render()
+        # prepare to write this result to README.md
+        tools.write_file(_path, render_result)
+        logger.info('Generate fabfile.')
 
     def gen_app(self):
         pass
