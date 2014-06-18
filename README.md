@@ -18,5 +18,6 @@ Now the structure is fixed([tornado](http://www.tornadoweb.org/) + [mongodb](htt
     cd yeopy && python setup.py install
     cd YOUR_PROJECT_PATH && yeopy init -p <YOUR_PROJECT_NAME>
 
+----
 
 > Now it's just a demo for myself. Feel free to fork it.
