@@ -16,7 +16,7 @@ tornado.httpclient.AsyncHTTPClient.configure("tornado.simple_httpclient.SimpleAs
 tornado.options.parse_command_line()
 
 application = tornado.web.Application(
-    route.get_routes(),
+    route.get_routes(),  # TODO: change to the right routes
     debug=tornado.options.options.debug)
 
 
