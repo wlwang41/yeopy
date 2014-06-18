@@ -198,8 +198,8 @@ class route(object):
         return _handler
 
     @classmethod
-    def get_routes(self):
-        return self._routes
+    def get_routes(cls):
+        return cls._routes
 
 
 def route_redirect(from_, to, name=None):
