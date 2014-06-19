@@ -187,14 +187,12 @@ class route(object):
     """
     _routes = []
 
-    def __init__(self, uri, name=None):
+    def __init__(self, uri):
         self._uri = uri
-        self.name = name
 
     def __call__(self, _handler):
         """gets called when we class decorate"""
-        name = self.name and self.name or _handler.__name__
-        self._routes.append(tornado.web.url(self._uri, _handler, name=name))
+        self._routes.append((self._uri, _handler))
         return _handler
 
     @classmethod
@@ -202,5 +200,5 @@ class route(object):
         return cls._routes
 
 
-def route_redirect(from_, to, name=None):
-    route._routes.append(tornado.web.url(from_, tornado.web.RedirectHandler, dict(url=to), name=name))
+def route_redirect(from_, to):
+    route._routes.append((from_, tornado.web.RedirectHandler, dict(url=to)))
