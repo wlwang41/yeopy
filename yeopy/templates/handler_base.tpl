@@ -29,7 +29,7 @@ class BaseHandler(tornado.web.RequestHandler):
     def _handle_other_error(self, e):
         d = {
             'code': exc.Code.INTERNAL_ERROR[0],
-            'msg': exc.Code.INTERNAL_ERROR[1] + str(e)
+            'msg': exc.Code.INTERNAL_ERROR[1]
         }
         self.write_data(d, code=400, no_wrap=True)
 

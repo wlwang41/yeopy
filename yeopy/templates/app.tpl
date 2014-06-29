@@ -6,7 +6,7 @@ import tornado.ioloop
 import tornado.options
 import tornado.httpclient
 
-from .tools import route
+from {{pname}}.handlers import route
 
 tornado.options.define("port", default=8008, help="run on the given port", type=int)
 tornado.options.define("debug", type=bool, default=True, help="run in debug mode with autoreload")
@@ -15,8 +15,11 @@ tornado.httpclient.AsyncHTTPClient.configure("tornado.simple_httpclient.SimpleAs
 
 tornado.options.parse_command_line()
 
+routes = route.get_routes()
+print routes
+
 application = tornado.web.Application(
-    route.get_routes(),  # TODO: change to the right routes
+    handlers=routes,  # TODO: change to the right routes
     debug=tornado.options.options.debug)
 
 

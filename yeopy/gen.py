@@ -39,6 +39,7 @@ class Generator(object):
                 'app': self.env.get_template('app.tpl'),
                 'tools': self.env.get_template('tools.tpl'),
                 'handler_base': self.env.get_template('handler_base.tpl'),
+                'handler_init': self.env.get_template('handler_init.tpl'),
                 'base_init': self.env.get_template('base_init.tpl'),
                 'exc': self.env.get_template('exc.tpl'),
                 'log': self.env.get_template('log.tpl'),
@@ -91,7 +92,10 @@ class Generator(object):
         logger.info('Generate python package.')
 
     def gen_app(self):
-        render_result = self.templates['app'].render()
+        confs = {
+            'pname': self.pname,
+        }
+        render_result = self.templates['app'].render(confs)
         tools.write_file(os.path.join(self.python_pack_dir, 'app.py'), render_result)
         logger.info('Generate app.py.')
 
@@ -104,7 +108,7 @@ class Generator(object):
         _handlers_path = os.path.join(self.python_pack_dir, 'handlers')
         os.mkdir(_handlers_path)
         # create __init__.py
-        render_result = self.templates['init'].render()
+        render_result = self.templates['handler_init'].render()
         tools.write_file(os.path.join(_handlers_path, '__init__.py'), render_result)
         # create base handler
         _base_handler_path = os.path.join(_handlers_path, 'base.py')
