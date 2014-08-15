@@ -131,7 +131,7 @@ def port_base(mark):
     return 290
 
 
-def nginx_conf(backend='backend', optpath="/opt", mark="", domain="pfile.kuaizhan.com", files_path="/opt/pfiles/plugins"):
+def nginx_conf(backend='backend', optpath="/opt", mark="", domain="", files_path=""):
     portbase = port_base(mark)
 
     hosts = servers.roles.get(backend, [])
