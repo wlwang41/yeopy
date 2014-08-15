@@ -88,7 +88,10 @@ class Generator(object):
         _path = os.path.join(self.project_root_dir, 'fabfile.py')
 
         # prepare to render confs
-        render_result = self.templates['fabfile'].render()
+        confs = {
+            'pname': self.pname,
+        }
+        render_result = self.templates['fabfile'].render(confs)
 
         tools.write_file(_path, render_result)
 
