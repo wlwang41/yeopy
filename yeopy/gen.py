@@ -151,8 +151,11 @@ class Generator(object):
         tools.write_file(os.path.join(_handlers_path, '__init__.py'), render_result)
 
         # create base handler
+        confs = {
+            'pexc': self.pname.title() + 'Exception',
+        }
         _base_handler_path = os.path.join(_handlers_path, 'base.py')
-        render_result = self.templates['handler_base'].render()
+        render_result = self.templates['handler_base'].render(confs)
         tools.write_file(_base_handler_path, render_result)
 
         logger.info('Generate handlers.')

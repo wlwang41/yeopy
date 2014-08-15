@@ -28,13 +28,13 @@ class BaseHandler(tornado.web.RequestHandler):
 
     def _handle_other_error(self, e):
         d = {
-            'code': exc.Code.INTERNAL_ERROR[0],
-            'msg': exc.Code.INTERNAL_ERROR[1]
+            'code': exc.CODES.FAILURE[0],
+            'msg': exc.CODES.FAILURE[1]
         }
         self.write_data(d, code=400, no_wrap=True)
 
     EXCEPTION_HANDLERS = {
-        (exc.BaseError): '_handle_error',
+        (exc.{{pexc}}): '_handle_error',
         (Exception): '_handle_other_error'
     }
 
