@@ -27,6 +27,22 @@ def color_msg(color, msg):
     return COLOR_CODES[color] + msg + COLOR_CODES["reset"]
 
 
+def decode_to_unicode(text):
+    """convert text to unicode safely."""
+    if isinstance(text, str):
+        return text.decode('utf-8')
+    else:
+        return text
+
+
+def encode_from_unicode(text):
+    """convert text to ascii safely."""
+    if isinstance(text, unicode):
+        return text.encode('utf-8')
+    else:
+        return text
+
+
 def check_path_exists(path):
     """Check if the path(include file and directory) exists"""
     if osp.exists(path):
@@ -92,7 +108,7 @@ def listdir_nohidden(path):
 
 def write_file(path, content):
     with open(path, 'w') as f:
-        f.write(content)
+        f.write(encode_from_unicode(content))
 
 
 if __name__ == "__main__":
